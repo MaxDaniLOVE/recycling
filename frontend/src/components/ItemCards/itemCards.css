@@ -1,0 +1,10 @@
+.actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions-wrapper p{
+    margin: .5rem 0;
+}

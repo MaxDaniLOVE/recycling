@@ -7,7 +7,11 @@ const urls = [
   { url: '/shops', label: 'Магазины' },
 ]
 
-const Header = () => {
+const Header = ({
+  openSignupModal,
+  onLogout,
+  isLoggedIn,
+}) => {
   const { pathname } = window.location;
   return (
     <header className="header">
@@ -27,7 +31,9 @@ const Header = () => {
               }
             </ul>
           </nav>
-          <button className="header__button">Вход</button>
+          <button onClick={isLoggedIn ? onLogout : openSignupModal} className="header__button">
+            {isLoggedIn ? 'Выйти' : 'Вход'}
+          </button>
       </div>
     </div>
   </header>

@@ -10,12 +10,15 @@ import axios from 'axios'
 import { urlBase } from '../../constants'
 import Header from '../Header';
 import Footer from '../Footer';
+import NewsInfo from '../../pages/NewsInfo';
+import RegisterModal from '../RegisterModal';
 
 export default function App() {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ isRegisterMode, setIsRegisterMode ] = useState(false);
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+    const [ isOpenSignUpModal, setIsOpenSignUpModal ] = useState(false)
     async function onSubmit(e) {
         e.preventDefault();
         try {
@@ -32,6 +35,7 @@ export default function App() {
                 localStorage.setItem('userEmail', userEmail);
                 setIsLoggedIn(true)
             }
+            setIsOpenSignUpModal(false);
         } catch (e) {
             console.log(e)
         }
@@ -58,10 +62,24 @@ export default function App() {
         localStorage.removeItem('userEmail');
         setIsLoggedIn(false)
     }
-    
     return (
         <div>
-            <Header />
+            <Header
+                openSignupModal={() => setIsOpenSignUpModal(true)}
+                onLogout={onLogout}
+                isLoggedIn={isLoggedIn}
+            />
+            <RegisterModal
+                isOpenSignUpModal={isOpenSignUpModal}
+                isRegisterMode={isRegisterMode}
+                onSubmit={onSubmit}
+                onChangeEmail={onChangeEmail}
+                onChangePassword={onChangePassword}
+                onChangeRegisterMode={onChangeRegisterMode}
+                email={email}
+                password={password}
+                closeModal={() => setIsOpenSignUpModal(false)}
+            />
             <BrowserRouter>
                 <Switch>
                     <Route exact path={'/'}>
@@ -70,11 +88,14 @@ export default function App() {
                     <Route path={'/shops'}>
                         <Shops />
                     </Route>
-                    <Route path={'/news'}>
+                    <Route exact path={'/news'}>
                         <News />
                     </Route>
                     <Route path={'/action'}>
                         <Action />
+                    </Route>
+                    <Route path={'/news/:newsId'}>
+                        <NewsInfo news={news} />
                     </Route>
                     <Redirect to={'/'}/>
                 </Switch>

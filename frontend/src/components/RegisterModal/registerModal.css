@@ -1,0 +1,128 @@
+#modal-container {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 1;
+}
+#modal-container .modal-background {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    vertical-align: middle;
+}
+#modal-container .modal-background .modal {
+    background: white;
+    padding: 50px;
+    display: inline-block;
+    border-radius: 3px;
+    font-weight: 300;
+    position: relative;
+}
+#modal-container.open {
+    z-index: 1111;
+    transform: scale(1);
+}
+#modal-container.open .modal-background {
+    background: rgba(0, 0, 0, .7);
+}
+#modal-container.open .modal-background .modal {
+    position: relative;
+    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.open + .content {
+    z-index: 1;
+    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.out .modal-background .modal {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.out + .content {
+    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.modal .close__button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-color: #e2e2e5;
+    color: #000;
+    text-align: center;
+    font-size: .75rem;
+    padding: 0;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 30%);
+    border-radius: 5%;
+    border: none;
+}
+.modal form {
+    display: flex;
+    flex-direction: column;
+}
+.modal label {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+.modal label.register__mode{
+    flex-direction: row;
+}
+.modal button[type=submit] {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    background-color: #4BC553;
+    color: #fff;
+    text-align: center;
+    padding: 8px 0;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 30%);
+    border-radius: 30px;
+    border: none;
+}
+@keyframes blowUpModal {
+    0% {
+        transform:scale(0);
+    }
+    100% {
+        transform:scale(1);
+    }
+}
+@keyframes blowUpModalTwo {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+@keyframes blowUpContentTwo {
+    0% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes blowUpContent {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    99.9% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0);
+    }
+}

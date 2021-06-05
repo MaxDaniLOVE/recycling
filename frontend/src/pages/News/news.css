@@ -66,6 +66,7 @@ ul {
   font-weight: 700;
   color: #fff;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 .calendar__years-item.selected {
   font-size: 25px;
@@ -83,6 +84,7 @@ ul {
   line-height: 20px;
   font-weight: 700;
   color: #fff;
+  cursor: pointer;
 }
 .calendar__monthes-item.selected{
   transition: all 0.2s ease;

@@ -1,1 +1,1 @@
-export const urlBase = 'http://localhost:5500'
+export const urlBase = process.env.REACT_APP_HEROKU_API || 'http://localhost:5500'

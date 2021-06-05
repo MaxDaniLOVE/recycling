@@ -16,8 +16,9 @@ const transporter = nodemailer.createTransport({
     tls: { rejectUnauthorized: false }
 });
 
-const sendMailToAdmin = async (body) => {
-    const { keyword, text } = body;
+const sendMailToAdmin = async (req) => {
+    const { keyword, text } = req.body;
+    const url = req.protocol + '://' + req.get('host');
     const { id } = await db.collection('topics').add({
         keyword, text, verified: false
     });
@@ -30,8 +31,8 @@ const sendMailToAdmin = async (body) => {
                  <div>Новая статья по переработке "${keyword}"</div>
                  <div>${text}</div>
                  <div>
-                     <a style="color: green" href="http://localhost:5500/topic/${id}/verify">Запостить</a>
-                     <a style="color: red" href="http://localhost:5500/topic/${id}/delete">Удалить</a>
+                     <a style="color: green" href="${url}/topic/${id}/verify">Запостить</a>
+                     <a style="color: red" href="${url}/topic/${id}/delete">Удалить</a>
                  </div>
             </div>
         `,
@@ -79,7 +80,7 @@ router.use('/', authMiddleware);
 
 router.post('/create', async (req, res) => {
     try {
-        const result = await sendMailToAdmin(req.body);
+        const result = await sendMailToAdmin(req);
         return res.send({ result });
     } catch (error) {
         return res.status(500).send({ error });

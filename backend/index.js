@@ -6,7 +6,9 @@ const topicRoutes = require('./routes/topic')
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: process.env.BASE_URL || 'http://localhost:3000',
+}));
 
 app.use(bodyParser.json());
 app.use('/topic', topicRoutes)

@@ -26,7 +26,12 @@ const Shops = () => {
             style={{color:'#eee', fontSize:'12px', position:'absolute', top:'14px'}}>
               Яндекс.Карты — транспорт, навигация, поиск мест
           </a>
-          <iframe src="https://yandex.by/map-widget/v1/-/CBRwfTX5XB" frameBorder="1" allowFullScreen style={{position: 'relative'}}/>
+            <iframe
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab9784a7e416f0f4bd713e256589d96fe0ff16c9a10bfe106ee4599721dbcc0b2&amp;source=constructor"
+                width="500"
+                height="400"
+                frameBorder="0"
+            />
         </div>
       </section>
     </>

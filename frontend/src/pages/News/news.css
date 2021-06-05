@@ -60,14 +60,14 @@ ul {
   margin: 0 auto 13px;
   min-height: 31px;
 }
-.calendar__years-item a {
+.calendar__years-item {
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
   color: #fff;
   transition: all 0.2s ease;
 }
-.calendar__years-item.selected a {
+.calendar__years-item.selected {
   font-size: 25px;
   line-height: 31px;
 }
@@ -83,6 +83,10 @@ ul {
   line-height: 20px;
   font-weight: 700;
   color: #fff;
+}
+.calendar__monthes-item.selected{
+  transition: all 0.2s ease;
+  font-size: 20px;
 }
 
 .slider__inner {

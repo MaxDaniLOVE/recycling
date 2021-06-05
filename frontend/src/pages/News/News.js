@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './news.css';
+import { DateFilters } from './DateFilters/DateFilters';
 
 const News = () => {
+  const [ activeYear, setActiveYear ] = useState(2019);
+  const [ activeMonth, setActiveMonth ] = useState(1);
   useEffect(() => {
     const yearsList = document.querySelectorAll('.calendar__years-item');
   yearsList.forEach((item) => {
@@ -127,16 +130,16 @@ const News = () => {
   function toggleNewsControlsLeftDisabled(isDisabled) {
     newsSliderControlsLeft.classList.toggle('disabled', isDisabled);
     newsSliderControlsLeft.classList.contains('disabled')
-      ? newsSliderControlsLeftImage.src = '../../assets/arrow-left.svg'
-      : newsSliderControlsLeftImage.src = '../../assets/arrow-left-active.svg';
+      ? newsSliderControlsLeftImage.src = 'assets/arrow-left.svg'
+      : newsSliderControlsLeftImage.src = 'assets/arrow-left-active.svg';
   };
 
   function toggleNewsControlsRightDisabled(isDisabled) {
     
     newsSliderControlsRight.classList.toggle('disabled', isDisabled);
     newsSliderControlsRight.classList.contains('disabled')
-      ? newsSliderControlsRightImage.src = '../../assets/arrow-right.svg'
-      : newsSliderControlsRightImage.src = '../../assets/arrow-right-active.svg';
+      ? newsSliderControlsRightImage.src = 'assets/arrow-right.svg'
+      : newsSliderControlsRightImage.src = 'assets/arrow-right-active.svg';
   };
 
   function newsSlideLeft(step) {
@@ -184,27 +187,12 @@ const News = () => {
     <>
       <section className="calendar">
     <div className="container">
-      <div className="calendar__inner">
-        <ul className="calendar__years-list">
-          <li className="calendar__years-item"><a href="#">2019</a></li>
-          <li className="calendar__years-item"><a href="#">2020</a></li>
-          <li className="calendar__years-item selected"><a href="#">2021</a></li>
-        </ul>
-        <ul className="calendar__monthes-list">
-          <li className="calendar__monthes-item"><a href="#">Январь</a></li>
-          <li className="calendar__monthes-item"><a href="#">Февраль</a></li>
-          <li className="calendar__monthes-item"><a href="#">Март</a></li>
-          <li className="calendar__monthes-item"><a href="#">Апрель</a></li>
-          <li className="calendar__monthes-item"><a href="#">Май</a></li>
-          <li className="calendar__monthes-item"><a href="#">Июнь</a></li>
-          <li className="calendar__monthes-item"><a href="#">Июль</a></li>
-          <li className="calendar__monthes-item"><a href="#">Август</a></li>
-          <li className="calendar__monthes-item"><a href="#">Сентябрь</a></li>
-          <li className="calendar__monthes-item"><a href="#">Октябрь</a></li>
-          <li className="calendar__monthes-item"><a href="#">Ноябрь</a></li>
-          <li className="calendar__monthes-item"><a href="#">Декабрь</a></li>
-        </ul>
-      </div>
+      <DateFilters
+          activeYear={activeYear}
+          setActiveYear={setActiveYear}
+          activeMonth={activeMonth}
+          setActiveMonth={setActiveMonth}
+      />
     </div>
   </section>
   <section className="slider">

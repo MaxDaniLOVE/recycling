@@ -1,52 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+
+const sliderStyles = {
+  1: [{ transform: 'translateX(0)' }, { transform: 'translateX(0)' }, { transform: 'translateX(0)' }],
+  2: [{ transform: 'translateX(0)' }, { transform: 'translateX(-280px)' }, { transform: 'translateX(0)' }],
+  3: [{ transform: 'translateX(0)' }, { transform: 'translateX(-280px)' }, { transform: 'translateX(-280px)' }],
+}
 
 const Main = () => {
-  useEffect(() => {
-    const aboutMenuItemList = document.querySelectorAll('.about__menu-item');
-    const aboutImage = document.querySelector('.about__image img');
-    
-    aboutMenuItemList.forEach((item) => {
-      item.addEventListener('click', (e) => {
-        aboutMenuItemList.forEach((item) => {
-          item.classList.remove('active');
-        });
-        item.classList.add('active');
-        const pos = item.getAttribute('data-pos');
-        aboutImage.src = `./assets/about${pos}.jpg`;
-      });
-    });
-    
-    const sliderList = document.querySelectorAll('.intro__slider-item');
-    const sliderContentList = document.querySelectorAll('.intro__slider-item__content');
-    sliderList.forEach((item) => {
-      item.addEventListener('click', () => {
-        hideSliderContent([...sliderList].indexOf(item));  
-      });
-    });
-    
-    function hideSliderContent(activePos) {
-      sliderContentList.forEach((item) => {
-        const pos = [...sliderContentList].indexOf(item);
-        item.classList.toggle('hidden', pos !== activePos);
-        if (activePos === 0) {
-          sliderList.forEach((item) => {
-            item.style.transform = 'translateX(0)';
-          });
-        } else if (activePos === 1) {
-          sliderList[1].style.transform = 'translateX(-280px)';
-          sliderList[2].style.transform = 'translateX(0)';
-        } else if (activePos === 2) {
-          sliderList[1].style.transform = 'translateX(-280px)';
-          sliderList[2].style.transform = 'translateX(-280px)';
-        }
-      });
-    };
-  }, [])
+  const [ activeAction, setActiveAction ] = useState(1);
+  const [ activeImage, setActiveImage ] = useState('assets/action1.jpg');
+  const onClick = ({ currentTarget: { dataset: { pos } } }) => {
+    setActiveAction(+pos);
+    setActiveImage(`/assets/action${+pos}.jpg`)
+  };
+  const [ activeSlider, setActiveSlider ] = useState(1);
+  const onClickSlider = ({ currentTarget: { dataset: { pos } } }) => setActiveSlider(+pos);
+  const activeSliderStyles = sliderStyles[activeSlider];
   return (
     <>
         <section className="intro">
     <div className="container">
-      <div className="intro__inner">
+      <div className="intro__inner_main">
         <div className="intro__dots">
           <ul className="intro__dots-list">
             <li className="intro__dots-item active"><a href="#"></a></li>
@@ -55,31 +29,37 @@ const Main = () => {
             <li className="intro__dots-item"><a href="#"></a></li>
           </ul>
         </div>
-        <div className="intro__content">
-          <div className="intro__logo">
-            <img src="./assets/logo-large.svg" alt="" />
+        <div className="intro__content_main">
+          <div className="intro__logo_main">
+            <img src="/assets/logo-large.svg" alt="" />
           </div>
-          <h2 className="intro__title">Каждый вносит вклад в проблему мусора!</h2>
-          <p className="intro__text">И размеры этого вклада достаточно большие,
+          <h2 className="intro__title_main">Каждый вносит вклад в проблему мусора!</h2>
+          <p className="intro__text_main">И размеры этого вклада достаточно большие,
             чтобы задуматься об изменениях.</p>
           <button className="intro__button">Хочу действовать!</button>
           <div className="intro__slider">
-            <div className="intro__slider-item" data-pos="1">
+            <div className="intro__slider-item" data-pos="1" onClick={onClickSlider} style={activeSliderStyles[0]}>
               <div className="intro__slider-item__logo">
-                <img src="./assets/car.svg" alt="" />
+                <img src="/assets/car.svg" alt="" />
               </div>
-              <div className="intro__slider-item__content">
+              <div
+                  className={`intro__slider-item__content ${activeSlider !== 1 && 'hidden'}`}
+
+              >
                 <h3 className="intro__slider-item__number">90%</h3>
                 <p className="intro__slider-item__text"><span>отходов</span> отправляются на свалки,
                   где они будут <span>разлагаться сотни лет,</span>
                   выделяя токсичные вещества.</p>
               </div>
             </div>
-            <div className="intro__slider-item" data-pos="2">
+            <div className="intro__slider-item" data-pos="2" onClick={onClickSlider}  style={activeSliderStyles[1]}>
               <div className="intro__slider-item__logo">
-                <img src="./assets/bull.svg" alt="" />
+                <img src="/assets/bull.svg" alt="" />
               </div>
-              <div className="intro__slider-item__content hidden">
+              <div
+                  className={`intro__slider-item__content ${activeSlider !== 2 && 'hidden'}`}
+
+              >
                 <h3 className="intro__slider-item__number">500 кг</h3>
                 <p className="intro__slider-item__text">отходов производит
                   <span>1 человек за 1 год жизни.</span>
@@ -87,11 +67,14 @@ const Main = () => {
                 </p>
               </div>
             </div>
-            <div className="intro__slider-item " data-pos="3">
+            <div className="intro__slider-item " data-pos="3" onClick={onClickSlider} style={activeSliderStyles[2]}>
               <div className="intro__slider-item__logo">
-                <img src="./assets/fish.svg" alt="" />
+                <img src="/assets/fish.svg" alt="" />
               </div>
-              <div className="intro__slider-item__content hidden">
+              <div
+                  className={`intro__slider-item__content ${activeSlider !== 3 && 'hidden'}`}
+
+              >
                 <h3 className="intro__slider-item__number">35 тонн</h3>
                 <p className="intro__slider-item__text">отходов производит
                   <span>1 человек за 70 лет жизни.</span>
@@ -106,10 +89,10 @@ const Main = () => {
   </section>
   <section className="about">
     <div className="about__image">
-      <img src="./assets/about2.jpg" alt="" />
+      <img src={activeImage} alt="" />
     </div>
     <div className="about__menu">
-      <div className="about__menu-item" data-pos="1">
+      <div className={`about__menu-item ${activeAction === 1 && 'active'}`} onClick={onClick} data-pos="1">
         <h3 className="about__menu-item__title">Мы используем огромные
           территории под свалки</h3>
         <p className="about__menu-item__text">2,12 миллиарда тонн – столько мусора
@@ -117,12 +100,12 @@ const Main = () => {
           Эта гора весит намного больше общей
           массы всех жителей Земли — 287 млн тонн.</p>
       </div>
-      <div className="about__menu-item active" data-pos="2">
+      <div className={`about__menu-item ${activeAction === 2 && 'active'}`} onClick={onClick}  data-pos="2">
         <h3 className="about__menu-item__title">Мусор отравляет природу и человека</h3>
         <p className="about__menu-item__text">Мусор долго разлагается, производит
           токсины, портит природу и ее ресурсы, которыми мы пользуемся: воздух, воду, еду.</p>
       </div>
-      <div className="about__menu-item" data-pos="3">
+      <div className={`about__menu-item ${activeAction === 3 && 'active'}`} onClick={onClick}  data-pos="3">
         <h3 className="about__menu-item__title">Мусор сжигают, а это опасно и неэкономично</h3>
         <p className="about__menu-item__text">При сжигании мусора образуются токсичные вещества – тяжелые металлы, диоксины,
           которые имеют свойство накапливаться
@@ -145,7 +128,7 @@ const Main = () => {
           <div className="recycling__box-left">
             <div className="recycling__box-item">
               <div className="recycling__box-item__logo">
-                <img src="./assets/bicycle.png" alt=""/>
+                <img src="/assets/bicycle.png" alt=""/>
               </div>
               <p className="recycling__box-item__text">
                 <span>Из 700 алюминиевых
@@ -156,7 +139,7 @@ const Main = () => {
             </div>
             <div className="recycling__box-item">
               <div className="recycling__box-item__logo">
-                <img src="./assets/chair.png" alt="" />
+                <img src="/assets/chair.png" alt="" />
               </div>
               <p className="recycling__box-item__text">
                 <span>Из 110 пластиковых
@@ -167,7 +150,7 @@ const Main = () => {
             </div>
             <div className="recycling__box-item">
               <div className="recycling__box-item__logo">
-                <img src="./assets/jacket.png" alt="" />
+                <img src="/assets/jacket.png" alt="" />
               </div>
               <p className="recycling__box-item__text">
                 <span>Из 25 пластиковых
@@ -180,7 +163,7 @@ const Main = () => {
           <div className="recycling__box-right">
             <div className="recycling__box-item">
               <div className="recycling__box-item__logo">
-                <img src="./assets/shirt.png" alt="" />
+                <img src="/assets/shirt.png" alt="" />
               </div>
               <p className="recycling__box-item__text">
                 Из <span>7 литровых
@@ -191,7 +174,7 @@ const Main = () => {
             </div>
             <div className="recycling__box-item">
               <div className="recycling__box-item__logo">
-                <img src="./assets/paper.png" alt="" />
+                <img src="/assets/paper.png" alt="" />
               </div>
               <p className="recycling__box-item__text">
                 Из <span>1 кг газет</span>
@@ -202,7 +185,7 @@ const Main = () => {
             </div>
             <div className="recycling__box-item">
               <div className="recycling__box-item__logo">
-                <img src="./assets/carpet.png" alt="" />
+                <img src="/assets/carpet.png" alt="" />
               </div>
               <p className="recycling__box-item__text">
                 Из <span>1200 пластиковых
@@ -221,7 +204,7 @@ const Main = () => {
         <div className="recycling__resources">
           <div className="recycling__resources-item">
             <div className="recycling__resources-item__logo">
-              <img src="./assets/tree.png" alt="" />
+              <img src="/assets/tree.png" alt="" />
             </div>
             <h4 className="recycling__resources-item__title">10 деревьев</h4>
             <p className="recycling__resources-item__text">Может спасти
@@ -231,7 +214,7 @@ const Main = () => {
           </div>
           <div className="recycling__resources-item">
             <div className="recycling__resources-item__logo">
-              <img src="./assets/bottles3.png" alt="" />
+              <img src="/assets/bottles3.png" alt="" />
             </div>
             <h4 className="recycling__resources-item__title">20 литров воды</h4>
             <p className="recycling__resources-item__text">Будет сэкономлено
@@ -241,7 +224,7 @@ const Main = () => {
           </div>
           <div className="recycling__resources-item">
             <div className="recycling__resources-item__logo">
-              <img src="./assets/tv.png" alt="" />
+              <img src="/assets/tv.png" alt="" />
             </div>
             <h4 className="recycling__resources-item__title">3 часа работы
               телевизора</h4>
@@ -253,7 +236,7 @@ const Main = () => {
           </div>
           <div className="recycling__resources-item">
             <div className="recycling__resources-item__logo">
-              <img src="./assets/tea.png" alt="" />
+              <img src="/assets/tea.png" alt="" />
             </div>
             <h4 className="recycling__resources-item__title">5 чашек чая</h4>
             <p className="recycling__resources-item__text">Можно вскипятить,
@@ -278,10 +261,10 @@ const Main = () => {
       </div>
     </div>
     <div className="power__image">
-      <img src="./assets/kids.jpg" alt="" />
+      <img src="/assets/kids.jpg" alt="" />
     </div>
   </section>
-  <section className="symbol" style={{ backgroundImage: `url('./assets/hands.jpg')` }}></section>
+  <section className="symbol" style={{ backgroundImage: `url('./assets/hands.jpg')` }} />
     </>
   );
 }

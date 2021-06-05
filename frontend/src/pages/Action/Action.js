@@ -1,22 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import './action.css';
 
 function Action(props) {
-  useEffect(() => {
-    const aboutMenuItemList = document.querySelectorAll('.about__menu-item');
-    const aboutImage = document.querySelector('.about__image img');
-
-    aboutMenuItemList.forEach((item) => {
-      item.addEventListener('click', () => {
-        aboutMenuItemList.forEach((item) => {
-          item.classList.remove('active');
-        });
-        item.classList.add('active');
-        const pos = item.getAttribute('data-pos');
-        aboutImage.src = `../../assets/action${pos}.jpg`;
-      });
-    });
-  }, [])
+  const [ activeAction, setActiveAction ] = useState(1);
+  const [ activeImage, setActiveImage ] = useState('assets/action1.jpg');
+  const onClick = ({ currentTarget: { dataset: { pos } } }) => {
+    setActiveAction(+pos);
+    setActiveImage(`/assets/action${+pos}.jpg`)
+  };
   return (
     <>
       <section className="intro__actions">
@@ -58,20 +49,20 @@ function Action(props) {
   </section>
   <section className="about">
     <div className="about__image">
-      <img src="assets/action2.jpg" alt="" />
+      <img src={activeImage} alt="" />
     </div>
     <div className="about__menu">
-      <div className="about__menu-item" data-pos="1">
+      <div className={`about__menu-item ${activeAction === 1 && 'active'}`} data-pos="1" onClick={onClick}>
         <p className="about__menu-item__text">По возможности <span>максимально откажитесь от пластика и пластиковых
             пакетов.</span> Например, не покупайте маленькие бутылки воды — вместо этого обзаведитесь многоразовой
           бутылкой из металла, стекла или пластика с маркировкой 5 (PP), которую можно пополнять.
         </p>
       </div>
-      <div className="about__menu-item active" data-pos="2">
+      <div className={`about__menu-item ${activeAction === 2 && 'active'}`} data-pos="2" onClick={onClick}>
         <p className="about__menu-item__text">Постарайтесь выбирать <span>стекло вместо пластика</span>, например, при
           покупке молочных товаров или для хранения продуктов дома и в офисе.</p>
       </div>
-      <div className="about__menu-item" data-pos="3">
+      <div className={`about__menu-item ${activeAction === 3 && 'active'}`} data-pos="3" onClick={onClick}>
         <p className="about__menu-item__text">Вместо больших пластиковых пакетов можно <span>завести долговечную тканевую
             сумку</span>, а вместо фасовочных пакетиков – сшить или купить прозрачные <span>тканевые мешочки</span> или
           найти другую оригинальную альтернативу.</p>

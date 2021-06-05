@@ -54,7 +54,7 @@ ul {
   right: 0;
   pointer-events: none;
 }
-.intro__inner {
+.intro__inner_main {
   min-height: 854px;
   display: flex;
   align-items: center;
@@ -87,16 +87,16 @@ ul {
 .intro__dots-item.active a {
   background-color: #4BC553;
 }
-.intro__content {
+.intro__content_main {
   width: 100%;
 }
-.intro__logo {
+.intro__logo_main {
   padding-top: 56px;
   padding-bottom: 28px;
   position: relative;
   z-index: 5;
 }
-.intro__title {
+.intro__title_main {
   position: relative;
   z-index: 5;
   font-size: 32px;
@@ -104,7 +104,7 @@ ul {
   font-weight: 700;
   margin-bottom: 32px;
 }
-.intro__text {
+.intro__text_main {
   font-size: 18px;
   line-height: 23px;
   margin-bottom: 42px;

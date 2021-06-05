@@ -92,7 +92,7 @@ export default function App() {
                         <News />
                     </Route>
                     <Route path={'/action'}>
-                        <Action />
+                        <Action isLoggedIn={isLoggedIn}/>
                     </Route>
                     <Route path={'/news/:newsId'}>
                         <NewsInfo news={news} />
@@ -100,7 +100,11 @@ export default function App() {
                     <Redirect to={'/'}/>
                 </Switch>
             </BrowserRouter>
-            <Footer />
+            <Footer
+                openSignupModal={() => setIsOpenSignUpModal(true)}
+                isLoggedIn={isLoggedIn}
+                onLogout={onLogout}
+            />
         </div>
     );
 }

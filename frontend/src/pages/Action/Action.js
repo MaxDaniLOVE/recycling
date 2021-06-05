@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './action.css';
+import RecyclingActions from './RecyclingActions';
 
-function Action(props) {
+function Action({ isLoggedIn }) {
   const [ activeAction, setActiveAction ] = useState(1);
   const [ activeImage, setActiveImage ] = useState('assets/action1.jpg');
   const onClick = ({ currentTarget: { dataset: { pos } } }) => {
@@ -183,7 +184,7 @@ function Action(props) {
           контейнер попадают в основном пищевые отходы.</h3>
         <h3 className="rules__subtitle">Пищевые отходы, собранные раздельно, – ценный вторичный ресурс, который можно
           компостировать.</h3>
-        <h2 className="rules__title">Как организовать раздельный сбор отходов дома</h2>
+        <h2 id='#howTo' className="rules__title">Как организовать раздельный сбор отходов дома</h2>
         <p className="rules__text">
           <span>Хорошая новость! Вам не нужны 10 ведер!
             Достаточно разделять отходы на 3 части – на какие именно, вы узнаете ниже.</span>
@@ -336,6 +337,7 @@ function Action(props) {
       </div>
     </div>
   </section>
+      <RecyclingActions isLoggedIn={isLoggedIn}/>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './news.css';
-import { DateFilters } from './DateFilters/DateFilters';
-import NewsSliderItem from './NewsSliderItem';
+import DateFilters from '../../components/DateFilters/DateFilters';
+import NewsSliderItem from '../../components/NewsSliderItem';
 
 const News = ({ news }) => {
   const [ activeYear, setActiveYear ] = useState(2019);

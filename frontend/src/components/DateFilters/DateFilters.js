@@ -15,7 +15,7 @@ const months = [
     { id: 12, label: 'Декабрь' },
 ]
 
-export const DateFilters = ({ activeYear, setActiveYear, activeMonth, setActiveMonth }) => (
+const DateFilters = ({ activeYear, setActiveYear, activeMonth, setActiveMonth }) => (
     <div className="calendar__inner">
         <ul className="calendar__years-list">
             <li
@@ -56,3 +56,5 @@ export const DateFilters = ({ activeYear, setActiveYear, activeMonth, setActiveM
         </ul>
     </div>
 )
+
+export default DateFilters;

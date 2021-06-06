@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { urlBase } from '../../../constants';
+import { urlBase } from '../../constants';
 import './recyclingActions.css';
 
 const RecyclingActions = ({ isLoggedIn }) => {

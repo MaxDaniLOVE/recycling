@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './action.css';
-import RecyclingActions from './RecyclingActions';
+import RecyclingActions from '../../components/RecyclingActions';
 
 function Action({ isLoggedIn }) {
   const [ activeAction, setActiveAction ] = useState(1);

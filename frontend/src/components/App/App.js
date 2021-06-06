@@ -95,7 +95,7 @@ export default function App() {
                         <Action isLoggedIn={isLoggedIn}/>
                     </Route>
                     <Route path={'/news/:newsId'}>
-                        <NewsInfo news={news} />
+                        <NewsInfo news={news} isLoggedIn={isLoggedIn} />
                     </Route>
                     <Redirect to={'/'}/>
                 </Switch>

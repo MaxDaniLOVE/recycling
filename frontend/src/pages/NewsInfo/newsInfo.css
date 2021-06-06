@@ -402,3 +402,7 @@ ul {
     line-height: 22px;
     color: #000;
 }
+.plog{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,16 +1,16 @@
 import React from 'react';
 import './newsInfo.css';
 import { useParams } from 'react-router-dom';
+import CommentsBlock from '../../components/CommentsBlock';
 
-const NewsInfo = ({ news = [] }) => {
+const NewsInfo = ({ news = [], isLoggedIn }) => {
     const { newsId } = useParams();
-    console.log(newsId)
     const newsItem = news.find(({ id }) => id === newsId);
     if (!newsItem) return (
         <h3>Новость не найдена</h3>
     )
     return (
-        <div className="plog">
+        <div className="container__actions plog">
             <div className="plogimg">
                 <img src={newsItem.images[0]} style={{ width:'100%', borderRadius: '10px' }} alt='test'/>
             </div>
@@ -29,6 +29,7 @@ const NewsInfo = ({ news = [] }) => {
             }}>
                 {newsItem.description}
             </div>
+            <CommentsBlock {...newsItem} isLoggedIn={isLoggedIn}/>
         </div>
     );
 };

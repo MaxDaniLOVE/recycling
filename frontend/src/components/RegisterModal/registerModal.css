@@ -37,6 +37,12 @@
     z-index: 1;
     animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
+#modal-container input {
+    border: 1px #bcbcbc solid;
+    box-shadow: none;
+    border-radius: 5px;
+    padding: .25rem .5rem;
+}
 #modal-container.out .modal-background .modal {
     animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }

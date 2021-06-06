@@ -5,12 +5,20 @@ const authMiddleware = require('../middlewares/auth-middleware');
 
 const db = firebase.firestore();
 
+const convertDate = (date) => (`${
+    date.getHours().toString().padStart(2, '0')}:${
+    date.getMinutes().toString().padStart(2, '0')} ${
+    (date.getMonth()+1).toString().padStart(2, '0')}.${
+    date.getDate().toString().padStart(2, '0')}.${
+    date.getFullYear().toString().padStart(4, '0')}`);
+
 router.get('/', async (req, res) => {
     const snapshot = await db.collection('news').get();
     const news = snapshot.docs.map((doc) => {
-        const data = doc.data() || {};
+        const { createdAt: timestamp, ...data } = doc.data() || {};
         const { id } = doc;
-        return { id, ...data }
+        const createdAt = convertDate(new Date(timestamp.toDate()));
+        return { id, createdAt, ...data }
     });
     return res.send({ news });
 })

@@ -89,7 +89,7 @@ export default function App() {
                         <Shops />
                     </Route>
                     <Route exact path={'/news'}>
-                        <News />
+                        <News news={news} />
                     </Route>
                     <Route path={'/action'}>
                         <Action isLoggedIn={isLoggedIn}/>

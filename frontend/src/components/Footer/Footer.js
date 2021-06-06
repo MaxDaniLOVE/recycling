@@ -8,7 +8,7 @@ const Footer = ({
     <footer className="footer">
     <div className="footer__inner">
       <div className="footer__logo">
-        <img src="assets/footer-logo.svg" alt="" />
+        <img src="/assets/footer-logo.svg" alt="" />
         <p className="footer__logo-text">По любым вопросам вы можете
           связаться с нами по почте:</p>
         <a href="Zerowasteminsk@gmail.com" className="footer__logo-link">Zerowasteminsk@gmail.com</a>

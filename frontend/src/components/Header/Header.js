@@ -18,7 +18,7 @@ const Header = ({
       <div className="container">
         <div className="header__inner">
           <div className="header__logo">
-            <img src="assets/logo.svg" alt="" />
+            <img src="/assets/logo.svg" alt="" />
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

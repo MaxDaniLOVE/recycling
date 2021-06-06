@@ -24,14 +24,14 @@ function Action({ isLoggedIn }) {
         <div className="intro__content">
           <div className="intro__content-item">
             <div className="intro__content-item__logo">
-              <img src="assets/house.svg" alt="" />
+              <img src="/assets/house.svg" alt="" />
             </div>
             <p className="intro__content-item__text">Найдите ближайший
               пункт приема вторсырья.</p>
           </div>
           <div className="intro__content-item">
             <div className="intro__content-item__logo">
-              <img src="assets/plastic.svg" alt="" />
+              <img src="/assets/plastic.svg" alt="" />
             </div>
             <p className="intro__content-item__text">Определите, какие виды
               сырья принимает этот пункт и изучите информацию о других пунктах — возможно, они принимают больший спектр
@@ -39,7 +39,7 @@ function Action({ isLoggedIn }) {
           </div>
           <div className="intro__content-item">
             <div className="intro__content-item__logo">
-              <img src="assets/urns2.svg" alt="" />
+              <img src="/assets/urns2.svg" alt="" />
             </div>
             <p className="intro__content-item__text">Организуйте раздельный
               сбор отходов дома.</p>

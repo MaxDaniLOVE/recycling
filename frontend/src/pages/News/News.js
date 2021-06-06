@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './news.css';
 import { DateFilters } from './DateFilters/DateFilters';
-import { Link } from 'react-router-dom';
+import NewsSliderItem from './NewsSliderItem';
 
-const News = () => {
+const News = ({ news }) => {
   const [ activeYear, setActiveYear ] = useState(2019);
   const [ activeMonth, setActiveMonth ] = useState(1);
   useEffect(() => {
@@ -90,7 +90,7 @@ const News = () => {
     });
   };
 
-  }, [])
+  }, [ news ])
   return (
     <>
       <section className="calendar">
@@ -107,61 +107,21 @@ const News = () => {
     <div className="slider__inner">
       <div className="slider__controls">
         <button className="slider__controls-left disabled">
-          <img src="assets/arrow-left.svg" alt=""/>
+          <img src="/assets/arrow-left.svg" alt=""/>
         </button>
         <button className="slider__controls-right">
-          <img src="assets/arrow-right-active.svg" alt=""/>
+          <img src="/assets/arrow-right-active.svg" alt=""/>
         </button>
       </div>
       <ul className="slider__list">
-        <li className="slider__item" data-pos="0">
-          <div className="slider__item-image">
-            <img src="assets/news1.jpg" alt=""/>
-          </div>
-          <div className="slider__item-content">
-            <p className="slider__item-date">14:01 19.04.2021</p>
-            <h1 className="slider__item-title">Кейптаун в огне: лесной пожар охватил одно из семи чудес природы</h1>
-            <p className="slider__item-text">Пожар быстро распространился по лесным склонам знаменитой Столовой горы,
-              перекинулся на городские здания и уже подступил к центру.</p>
-            <Link to={`/news/test`} className="slider__item-button">Подробнее</Link>
-          </div>
-        </li>
-        <li className="slider__item" data-pos="-1">
-          <div className="slider__item-image">
-            <img src="assets/news1.jpg" alt=""/>
-          </div>
-          <div className="slider__item-content">
-            <p className="slider__item-date">14:01 19.04.2021</p>
-            <h1 className="slider__item-title">Кейптаун в огне: лесной пожар охватил одно из семи чудес природы</h1>
-            <p className="slider__item-text">Пожар быстро распространился по лесным склонам знаменитой Столовой горы,
-              перекинулся на городские здания и уже подступил к центру.</p>
-            <Link to={`/news/test`} className="slider__item-button">Подробнее</Link>
-          </div>
-        </li>
-        <li className="slider__item" data-pos="-2">
-          <div className="slider__item-image">
-            <img src="assets/news1.jpg" alt=""/>
-          </div>
-          <div className="slider__item-content">
-            <p className="slider__item-date">14:01 19.04.2021</p>
-            <h1 className="slider__item-title">Кейптаун в огне: лесной пожар охватил одно из семи чудес природы</h1>
-            <p className="slider__item-text">Пожар быстро распространился по лесным склонам знаменитой Столовой горы,
-              перекинулся на городские здания и уже подступил к центру.</p>
-            <Link to={`/news/test`} className="slider__item-button">Подробнее</Link>
-          </div>
-        </li>
-        <li className="slider__item" data-pos="-3">
-          <div className="slider__item-image">d
-            <img src="assets/news1.jpg" alt=""/>
-          </div>
-          <div className="slider__item-content">
-            <p className="slider__item-date">14:01 19.04.2021</p>
-            <h1 className="slider__item-title">Кейптаун в огне: лесной пожар охватил одно из семи чудес природы</h1>
-            <p className="slider__item-text">Пожар быстро распространился по лесным склонам знаменитой Столовой горы,
-              перекинулся на городские здания и уже подступил к центру.</p>
-            <Link to={`/news/test`} className="slider__item-button">Подробнее</Link>
-          </div>
-        </li>
+        {
+          news.map((sliderItem, index) => (
+              <NewsSliderItem sliderItem={sliderItem} index={index} key={sliderItem.id}/>
+          ))
+        }
+        {
+          news.length && <NewsSliderItem sliderItem={news[0]} index={3} />
+        }
       </ul>
       <div className="slider__dots">
         <ul className="slider__dots-list">

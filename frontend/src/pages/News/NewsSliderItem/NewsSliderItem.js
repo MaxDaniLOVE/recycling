@@ -1,8 +1,12 @@
 import React from 'react';
 
-const NewsSliderItem = ({ sliderItem, index }) => {
+const NewsSliderItem = ({ activeSlide, sliderItem, index }) => {
+    const isSelected = activeSlide === index;
+    const diff = activeSlide - index;
+    const translateX = isSelected ? 0 : diff * 150;
+    const transform = `translate(-50%, -50%) translateX(${translateX}%)`;
     return (
-        <li className="slider__item" data-pos={-index}>
+        <li className="slider__item" style={{ transform }}>
             <div className="slider__item-image">
                 <img src={sliderItem.images[0]} alt=""/>
             </div>

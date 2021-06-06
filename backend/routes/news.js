@@ -8,12 +8,23 @@ const db = firebase.firestore();
 const convertDate = (date) => (`${
     date.getHours().toString().padStart(2, '0')}:${
     date.getMinutes().toString().padStart(2, '0')} ${
-    (date.getMonth()+1).toString().padStart(2, '0')}.${
     date.getDate().toString().padStart(2, '0')}.${
+    (date.getMonth()+1).toString().padStart(2, '0')}.${
     date.getFullYear().toString().padStart(4, '0')}`);
 
 router.get('/', async (req, res) => {
-    const snapshot = await db.collection('news').get();
+    const { year, month } = req.query;
+    const dateFrom = new Date();
+    dateFrom.setFullYear(year, month - 1, 1)
+    dateFrom.setHours(0, 0, 0, 0);
+    const dateTo = new Date();
+    dateTo.setFullYear(year, month, 1)
+    dateTo.setHours(0, 0, 0, 0);
+    const snapshot = await db
+        .collection('news')
+        .where('createdAt', '>=', dateFrom)
+        .where('createdAt', '<', dateTo)
+        .get();
     const news = snapshot.docs.map((doc) => {
         const { createdAt: timestamp, ...data } = doc.data() || {};
         const { id } = doc;

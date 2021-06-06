@@ -51,16 +51,18 @@ const CommentsBlock = ({ comments, liked, id, isLoggedIn }) => {
                 <h3 className='comments__container_title'>Комментарии:</h3>
                 <div className='comments__list'>
                     {
-                        availableComments.map(({ comment, email }, idx) => (
+                        availableComments.length ? availableComments.map(({ comment, email }, idx) => (
                             <p key={idx}>{comment}; Отправил: {email}</p>
-                        ))
+                        )) : (
+                            <p>Будьте первым кто оставит комментарий!</p>
+                        )
                     }
                 </div>
 
                 <span>{likedBy.length ? `Уже лайкнуло: ${likedBy.length} человек` : 'Пока никто не лайкнул эту запись'}</span>
                 {
                     isLoggedIn && (
-                        <button onClick={isLikedByUser ? onDislike : onLike}>{isLikedByUser ? 'dislike' : 'like'}</button>
+                        <button onClick={isLikedByUser ? onDislike : onLike}>{isLikedByUser ? 'Убрать мой лайк' : 'Мне нравится!'}</button>
                     )
                 }
             </div>

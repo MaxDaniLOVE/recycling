@@ -8,7 +8,7 @@ const RecyclingActions = ({ isLoggedIn }) => {
     const [ selectedId, setSelectedId ] = useState('');
     const [ topicKeyword, setTopicKeyword ] = useState('');
     const [ topicText, setTopicText ] = useState('');
-
+    const [ isDisplayMessage, setIsDisplayMessage ] = useState(false);
     useEffect(() => {
         (async () => {
            try {
@@ -30,6 +30,7 @@ const RecyclingActions = ({ isLoggedIn }) => {
                 text: topicText
             });
             setRecyclingTopics(topics);
+            setIsDisplayMessage(true);
         } catch (e) {
             setRecyclingTopics([]);
         }
@@ -57,28 +58,32 @@ const RecyclingActions = ({ isLoggedIn }) => {
                     )
                 }
             </div>
-            {
-                isLoggedIn ? (
-                    <div>
-                        <h3 className='recycling__topic_title'>Добавить свою статью</h3>
-                        <form className='recycling__form' id='sendTopic' onSubmit={submitTopic}>
-                            <label htmlFor='keyword'>
-                                Название:
-                                <input id='keyword' value={topicKeyword} onChange={({target: { value }}) => setTopicKeyword(value)}/>
-                            </label>
-                            <label htmlFor='text'>
-                                Статья:
-                                <textarea id='text' value={topicText} onChange={({target: { value }}) => setTopicText(value)} />
-                            </label>
-                            <button type='submit'>Отправить на модерацию</button>
-                        </form>
-                    </div>
-                ) : (
-                    <div>
-                        <h3 className='recycling__topic_title'>Войдите в учетную запись, чтобы отправить свою статью</h3>
-                    </div>
-                )
-            }
+            <div className='recycling__form_wrapper'>
+                {
+                    isLoggedIn ? (
+                        isDisplayMessage ? <h3 className='recycling__topic_title'>Ваша статья была отправлена на модерацию!</h3> : (
+                            <div>
+                                <h3 className='recycling__topic_title'>Добавить свою статью</h3>
+                                <form className='recycling__form' id='sendTopic' onSubmit={submitTopic}>
+                                    <label htmlFor='keyword'>
+                                        Название:
+                                        <input id='keyword' value={topicKeyword} onChange={({target: { value }}) => setTopicKeyword(value)}/>
+                                    </label>
+                                    <label htmlFor='text'>
+                                        Статья:
+                                        <textarea id='text' value={topicText} onChange={({target: { value }}) => setTopicText(value)} />
+                                    </label>
+                                    <button type='submit'>Отправить на модерацию</button>
+                                </form>
+                            </div>
+                        )
+                    ) : (
+                        <div>
+                            <h3 className='recycling__topic_title'>Войдите в учетную запись, чтобы отправить свою статью</h3>
+                        </div>
+                    )
+                }
+            </div>
         </div>
     );
 };

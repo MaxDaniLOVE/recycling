@@ -19,6 +19,8 @@ export default function App() {
     const [ isRegisterMode, setIsRegisterMode ] = useState(false);
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
     const [ isOpenSignUpModal, setIsOpenSignUpModal ] = useState(false)
+    const [ activeYear, setActiveYear ] = useState(2019);
+    const [ activeMonth, setActiveMonth ] = useState(1);
     async function onSubmit(e) {
         e.preventDefault();
         try {
@@ -47,13 +49,13 @@ export default function App() {
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         (async () => {
-            const { data: { news = [] } } = await axios.get(`${urlBase}/news`)
+            const { data: { news = [] } } = await axios.get(`${urlBase}/news?year=${activeYear}&month=${activeMonth}`)
             setNews(news)
         })()
         if (!token) return;
         setIsLoggedIn(true)
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }, [ isLoggedIn ])
+    }, [ isLoggedIn, activeYear, activeMonth ])
     const onLogout = async () => {
         await auth.signOut();
         axios.defaults.headers.common['Authorization'] = null;
@@ -89,7 +91,13 @@ export default function App() {
                         <Shops />
                     </Route>
                     <Route exact path={'/news'}>
-                        <News news={news} />
+                        <News
+                            activeYear={activeYear}
+                            setActiveYear={setActiveYear}
+                            activeMonth={activeMonth}
+                            setActiveMonth={setActiveMonth}
+                            news={news}
+                        />
                     </Route>
                     <Route path={'/action'}>
                         <Action isLoggedIn={isLoggedIn}/>

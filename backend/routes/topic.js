@@ -24,15 +24,15 @@ const sendMailToAdmin = async (req) => {
     });
     return await transporter.sendMail({
         from: 'recycle.smtp@gmail.com',
-        to: 'mahseeen@gmail.com',
+        to: 'strukova1999877@gmail.com',
         subject: `Новая статья по переработке "${keyword}"`,
         html: `
-             <div style="display: flex; flex-direction: column">
-                 <div>Новая статья по переработке "${keyword}"</div>
-                 <div>${text}</div>
+             <div>
+                 <div style="margin: 1rem;">Новая статья по переработке "${keyword}"</div>
+                 <div style="margin: 1rem;">${text}</div>
                  <div>
-                     <a style="color: green" href="${url}/topic/${id}/verify">Запостить</a>
-                     <a style="color: red" href="${url}/topic/${id}/delete">Удалить</a>
+                     <a style="margin: 1rem; color: green; font-weight: 800" href="${url}/topic/${id}/verify">Запостить</a>
+                     <a style="margin: 1rem; color: red; font-weight: 800" href="${url}/topic/${id}/delete">Удалить</a>
                  </div>
             </div>
         `,

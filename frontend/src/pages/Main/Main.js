@@ -36,7 +36,7 @@ const Main = () => {
           <h2 className="intro__title_main">Каждый вносит вклад в проблему мусора!</h2>
           <p className="intro__text_main">И размеры этого вклада достаточно большие,
             чтобы задуматься об изменениях.</p>
-          <button className="intro__button">Хочу действовать!</button>
+          <a href='/action' className="intro__button">Хочу действовать!</a>
           <div className="intro__slider">
             <div className="intro__slider-item" data-pos="1" onClick={onClickSlider} style={activeSliderStyles[0]}>
               <div className="intro__slider-item__logo">
@@ -121,7 +121,7 @@ const Main = () => {
           раздельный сбор и переработка</h2>
         <p className="recycling__text">Повторной переработке поддаётся
           80–90% содержимого нашего мусорного ведра.</p>
-        <button className="recycling__button action-btn">Хочу действовать!</button>
+        <a href='/action' className="recycling__button action-btn">Хочу действовать!</a>
         <h3 className="recycling__subtitle">Сколько полезных вещей
           можно изготовить из переработанных отходов?</h3>
         <div className="recycling__box">
@@ -257,7 +257,7 @@ const Main = () => {
           мир экологичнее и
           сохранить его красоту
           ля будущих поколений!</p>
-        <button className="power__button action-btn">Хочу действовать!</button>
+        <a href='/action' className="power__button action-btn">Хочу действовать!</a>
       </div>
     </div>
     <div className="power__image">
